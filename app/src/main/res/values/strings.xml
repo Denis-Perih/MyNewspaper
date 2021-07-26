@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">MainActivity</string>
+    <string name="slogan_app">Be aware..</string>
+    <string name="facebook_app_id">186530330101641</string>
+    <string name="fb_login_protocol_scheme">fb186530330101641</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="skip">Skip</string>
+    <string name="description">description</string>
+    <string name="email">Your Email ..</string>
+    <string name="btn_link_to_post">See source</string>
+    <string name="password">Your Password ..</string>
+    <string name="person_name">Your Person Name ..</string>
+    <string name="or">or</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_save_entry">Saved entries</string>
+    <string name="nav_change_account">Change account</string>
+    <string name="nav_exit">Exit</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_title">Android Studio</string>
+    
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="user_anonymous">Anonymous</string>
+    <string name="user_anonymous_email">email not set</string>
+
+    <string name="text_not_connected_internet">No access to internet</string>
+    <string name="text_not_connected_server">No access to server</string>
+
+</resources>
