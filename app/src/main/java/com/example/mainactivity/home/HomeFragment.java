@@ -17,9 +17,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -215,7 +217,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-            ((MainActivity) requireActivity()).openFragment(new HomeFragment());
+            dlHomeDrawer.closeDrawer(GravityCompat.START);
         } else if (id == R.id.nav_change_account) {
             FirebaseAuth.getInstance().signOut();
             ((MainActivity) requireActivity()).openFragment(new SplashScreenFragment());
@@ -228,6 +230,11 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
 
     @Override
     public boolean onBackPressed() {
+        FragmentManager manager = ((AppCompatActivity) requireContext())
+                .getSupportFragmentManager();
+        if (manager.getBackStackEntryCount() > 0) {
+            requireActivity().finish();
+        }
         if (dlHomeDrawer.isDrawerOpen(GravityCompat.START)) {
             dlHomeDrawer.closeDrawer(GravityCompat.START);
             return true;

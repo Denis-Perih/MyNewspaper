@@ -4,14 +4,15 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/coral"
-    android:id="@+id/clFrLoginScreen">
+    android:id="@+id/clFrLoginScreen"
+    android:paddingVertical="50dp">
 
     <ImageView
         android:id="@+id/ivLogoLoad"
         android:layout_width="150dp"
         android:layout_height="75dp"
         android:src="@drawable/ic_logowhite"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,7 +27,6 @@
         android:hint="@string/email"
         android:background="@drawable/background_login_password"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="80dp"
         android:layout_marginEnd="50dp"
         android:padding="12dp"
         android:textColorHint="@color/light_gray"
@@ -37,6 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivLogoLoad"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/etPasswordLayout"
         android:autofillHints="textEmailAddress"
         android:inputType="textEmailAddress" />
 
@@ -49,11 +50,11 @@
         android:hint="@string/password"
         android:textColorHint="@color/light_gray"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="30dp"
         android:layout_marginEnd="50dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnLogin">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etPassword"
@@ -75,18 +76,16 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="@string/login"
         android:textColor="@color/white"
         android:fontFamily="@font/colus_regular"
         android:background="@drawable/corners_load_window_button_sign_up"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="140dp"
-        android:layout_marginEnd="140dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordLayout"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/tvOr"/>
 
     <TextView
         android:id="@+id/tvOr"
@@ -97,52 +96,47 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:fontFamily="@font/rubik_regular"
-        android:layout_marginTop="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogin"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btnGoogleLogin"/>
 
     <Button
         android:id="@+id/btnGoogleLogin"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/google"
         android:textStyle="bold"
         android:textColor="@color/back_sign_up"
         android:fontFamily="@font/rubik_regular"
         android:textSize="14sp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
+        android:paddingHorizontal="20dp"
         android:background="@drawable/background_btn_google_facebook"
         android:drawableStart="@drawable/ic_google_logo_g"
         android:drawablePadding="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvOr"
-        app:layout_constraintEnd_toStartOf="@+id/btnFacebookLogin"/>
+        app:layout_constraintEnd_toStartOf="@+id/btnFacebookLogin"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <Button
         android:id="@+id/btnFacebookLogin"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/facebook"
         android:textStyle="bold"
         android:textColor="@color/back_sign_up"
         android:fontFamily="@font/rubik_regular"
         android:textSize="14sp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="50dp"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
+        android:paddingHorizontal="12dp"
         android:background="@drawable/background_btn_google_facebook"
         android:drawableStart="@drawable/ic_facebook_logo_f"
         android:drawablePadding="10dp"
+        app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toEndOf="@+id/btnGoogleLogin"
-        app:layout_constraintTop_toBottomOf="@+id/tvOr"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/btnGoogleLogin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btnGoogleLogin"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

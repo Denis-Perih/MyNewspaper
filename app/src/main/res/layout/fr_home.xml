@@ -4,9 +4,7 @@
     android:id="@+id/dlHomeDrawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:openDrawer="start">
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="wrap_content"

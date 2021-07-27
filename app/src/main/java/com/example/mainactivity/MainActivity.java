@@ -60,8 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void openFragment(Fragment newFragment) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .setCustomAnimations(R.anim.nav_default_enter_anim, R.anim.nav_default_exit_anim)
+                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top)
                 .replace(R.id.fragment_container_main, newFragment)
                 .addToBackStack(null);
 
@@ -75,8 +74,7 @@ public class MainActivity extends AppCompatActivity {
         newFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                .setCustomAnimations(R.anim.nav_default_enter_anim, R.anim.nav_default_exit_anim)
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
                 .replace(R.id.fragment_container_main, newFragment)
                 .addToBackStack(null);
 
