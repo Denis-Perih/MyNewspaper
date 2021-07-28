@@ -1,4 +1,4 @@
-package com.example.mainactivity.login_signup.login;
+package com.example.mainactivity.login_signup.signup;
 
 import android.content.Intent;
 import android.text.TextUtils;
@@ -15,39 +15,42 @@ import java.util.Collections;
 
 import static com.example.mainactivity.login_signup.firebase.FirebaseLoginSingleton.RC_SIGN_IN;
 
-public class LoginPresenter implements LoginContract.Presenter {
+public class SignUpPresenter implements SignUpContract.Presenter {
 
     private static final String AUTH_EMAIL_PASSWORD = "auth_email_password";
     private static final String AUTH_GOOGLE = "auth_google";
     private static final String AUTH_FACEBOOK = "auth_facebook";
 
-    private final LoginContract.View view;
+    private final SignUpContract.View view;
 
-    public LoginPresenter(LoginContract.View view) {
+    public SignUpPresenter(SignUpContract.View view) {
         this.view = view;
     }
 
     @Override
-    public void onLoginClicked(String email, String password) {
-        if (TextUtils.isEmpty(email)) {
+    public void onSignUpClicked(String name, String email, String password) {
+        if (TextUtils.isEmpty(name)) {
+            view.showSnackBar("Please enter your Person Name");
+            return;
+        } else if (TextUtils.isEmpty(email)) {
             view.showSnackBar("Please enter your email address");
             return;
         } else if (password.length() < 6) {
             view.showSnackBar("Please enter your password (more than 6 characters)");
             return;
         }
-        view.signInWithEmail(email, password);
+        view.signInWithEmail(name, email, password);
     }
 
     @Override
-    public void onLoginClickedGoogle() {
-        view.startSignInGoogle();
+    public void onSignUpClickedGoogle() {
+        view.startSignUpGoogle();
     }
 
     @Override
-    public void onLoginClickedFacebook(Fragment fragment) {
+    public void onSignUpClickedFacebook(Fragment fragment) {
         LoginManager.getInstance().logInWithReadPermissions(fragment, Collections.singletonList("public_profile"));
-        view.startSignInFacebook();
+        view.startSignUpFacebook();
     }
 
     @Override
@@ -68,20 +71,20 @@ public class LoginPresenter implements LoginContract.Presenter {
     }
 
     @Override
-    public void onSuccessLogin(String indicatorAuth) {
+    public void onSuccessSignUp(String indicatorAuth) {
         if (indicatorAuth.equals(AUTH_EMAIL_PASSWORD)
                 || indicatorAuth.equals(AUTH_GOOGLE)
                 || indicatorAuth.equals(AUTH_FACEBOOK)) {
-            view.successLogin();
+            view.successSignUp();
         }
     }
 
     @Override
-    public void onFailureLogin(String indicatorAuth) {
+    public void onFailureSignUp(String indicatorAuth) {
         if (indicatorAuth.equals(AUTH_EMAIL_PASSWORD)
                 || indicatorAuth.equals(AUTH_GOOGLE)
                 || indicatorAuth.equals(AUTH_FACEBOOK)) {
-            view.failureLogin("Incorrectly entered email or password");
+            view.failureSignUp("Registration error, please repeat");
         }
     }
 }

@@ -1,7 +1,6 @@
 package com.example.mainactivity.more;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +20,7 @@ import com.example.mainactivity.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
-public class MoreAboutPostFragment extends Fragment  {
+public class MoreAboutPostFragment extends Fragment implements MoreAboutPostContract.View {
 
     ConstraintLayout clMoreFragment;
 
@@ -31,7 +30,7 @@ public class MoreAboutPostFragment extends Fragment  {
     TextView tvDetailsTitle, tvDetailsDate, tvDetailsTextNews;
     Button btnDetailsAuthor;
 
-    String title, link, description, pubData, image_url;
+    private final MoreAboutPostContract.Present presenter = new MoreAboutPostPresenter(this);
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -49,50 +48,43 @@ public class MoreAboutPostFragment extends Fragment  {
         });
 
         ivImageDetailsWindow = v.findViewById(R.id.ivImageDetailsWindow);
+        ivImageDetailsWindow.setScaleType(ImageView.ScaleType.CENTER_CROP);
         tvDetailsTitle = v.findViewById(R.id.tvDetailsTitle);
         tvDetailsDate = v.findViewById(R.id.tvDetailsDate);
         tvDetailsTextNews = v.findViewById(R.id.tvDetailsTextNews);
 
         btnDetailsAuthor = v.findViewById(R.id.btnDetailsAuthor);
-        btnDetailsAuthor.setOnClickListener(v12 -> openDetailsAuthor());
+        btnDetailsAuthor.setOnClickListener(v12 -> presenter.openDetailsAuthor());
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            this.title = bundle.getString("title");
-            this.link = bundle.getString("link");
-            this.description = bundle.getString("description");
-            this.pubData = bundle.getString("pubDate");
-            this.image_url = bundle.getString("image_url");
-        }
-
-        setDataToPost();
+        presenter.setDataToPost(MoreAboutPostFragment.this);
 
         return v;
     }
 
-    private void setDataToPost() {
-        ivImageDetailsWindow.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if (image_url == null || image_url.equals("")) {
-            ivImageDetailsWindow.setImageResource(R.drawable.ic_iconfornoimage);
-        } else {
-            Picasso.get()
-                    .load(image_url)
-                    .into(ivImageDetailsWindow);
-        }
+    @Override
+    public void showSnackBar(String text) {
+        Snackbar.make(clMoreFragment, text, Snackbar.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void getDateToPost(String title, String description, String pubData) {
         tvDetailsTitle.setText(title);
         tvDetailsDate.setText(pubData);
         tvDetailsTextNews.setText(description);
     }
 
-    public void openDetailsAuthor() {
-        if (link == null || link.equals("")) {
-            Snackbar.make(clMoreFragment, "No link now", Snackbar.LENGTH_SHORT)
-                    .show();
-        } else {
-            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
-            String choiceTitle = "Select a browser";
-            Intent chooser = Intent.createChooser(intent, choiceTitle);
-            startActivity(chooser);
-        }
+    @Override
+    public void openLinkAuthorPost(Intent chooser) {
+        startActivity(chooser);
+    }
+
+    @Override
+    public void getImageToPost(String image_url) {
+        Picasso.get().load(image_url).into(ivImageDetailsWindow);
+    }
+
+    @Override
+    public void getDefaultImageToPost(int image) {
+        ivImageDetailsWindow.setImageResource(image);
     }
 }

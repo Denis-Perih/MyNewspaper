@@ -1,4 +1,4 @@
-package com.example.mainactivity;
+package com.example.mainactivity.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.mainactivity.R;
 import com.example.mainactivity.home.HomeFragment;
 import com.example.mainactivity.home.IOnBackPressed;
 import com.example.mainactivity.login_signup.firebase.UsersData;
+import com.example.mainactivity.login_signup.login.LoginFragment;
+import com.example.mainactivity.login_signup.signup.SignUpFragment;
 import com.example.mainactivity.more.MoreAboutPostFragment;
 import com.example.mainactivity.splash.SplashFragment;
 import com.example.mainactivity.splash.SplashScreenFragment;
@@ -18,13 +21,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainRouterContract {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        openFragment(new SplashFragment());
+        openSplashFragment();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -51,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
             usersData.setName(user.getDisplayName());
             usersData.setEmail(user.getEmail());
             usersData.setPhotoUri(user.getPhotoUrl());
-            openFragment(new HomeFragment());
+            openHomeFragment();
         } else {
-            openFragment(new SplashScreenFragment());
+            openSplashScreenFragment();
         }
     }
 
@@ -67,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
     public void openMoreAboutFragment(Bundle bundle) {
-
         Fragment newFragment = new MoreAboutPostFragment();
 
         newFragment.setArguments(bundle);
@@ -80,4 +88,31 @@ public class MainActivity extends AppCompatActivity {
 
         transaction.commit();
     }
+
+    @Override
+    public void openHomeFragment() {
+        openFragment(new HomeFragment());
+    }
+
+    @Override
+    public void openSplashFragment() {
+        openFragment(new SplashFragment());
+    }
+
+    @Override
+    public void openSplashScreenFragment() {
+        openFragment(new SplashScreenFragment());
+    }
+
+    @Override
+    public void openLoginFragment() {
+        openFragment(new LoginFragment());
+    }
+
+    @Override
+    public void openSignUpFragment() {
+        openFragment(new SignUpFragment());
+    }
+
+
 }

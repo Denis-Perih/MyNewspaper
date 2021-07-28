@@ -1,4 +1,4 @@
-package com.example.mainactivity.home;
+package com.example.mainactivity.home.rv_adapter;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -25,7 +25,7 @@ public class RVHorizontalAdapter extends RecyclerView.Adapter<RVHorizontalAdapte
 
     public AnswerMoreDetails answerMoreDetails;
 
-    RVHorizontalAdapter(List<Post> horizontalBlockNewsData, AnswerMoreDetails answerMoreDetails) {
+    public RVHorizontalAdapter(List<Post> horizontalBlockNewsData, AnswerMoreDetails answerMoreDetails) {
         this.horizontalBlockNewsData = horizontalBlockNewsData;
         this.answerMoreDetails = answerMoreDetails;
     }

@@ -11,11 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.mainactivity.MainActivity;
+import com.example.mainactivity.main.MainRouterContract;
 import com.example.mainactivity.R;
-import com.example.mainactivity.home.HomeFragment;
-import com.example.mainactivity.login_signup.login.LoginFragment;
-import com.example.mainactivity.login_signup.signup.SignUpFragment;
 
 public class SplashScreenFragment extends Fragment  {
 
@@ -31,11 +28,11 @@ public class SplashScreenFragment extends Fragment  {
 
         View v = inflater.inflate(R.layout.fr_splash_screen, container, false);
         btnLogin = v.findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(v1 -> ((MainActivity) requireActivity()).openFragment(new LoginFragment()));
+        btnLogin.setOnClickListener(v1 -> ((MainRouterContract) requireActivity()).openLoginFragment());
         btnSignUp = v.findViewById(R.id.btnSignUp);
-        btnSignUp.setOnClickListener(v12 -> ((MainActivity) requireActivity()).openFragment(new SignUpFragment()));
+        btnSignUp.setOnClickListener(v12 -> ((MainRouterContract) requireActivity()).openSignUpFragment());
         tvSkip = v.findViewById(R.id.tvSkip);
-        tvSkip.setOnClickListener(v13 -> ((MainActivity) requireActivity()).openFragment(new HomeFragment()));
+        tvSkip.setOnClickListener(v13 -> ((MainRouterContract) requireActivity()).openHomeFragment());
 
         return v;
     }
