@@ -90,13 +90,13 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
         if (name == null || name.equals("")) {
             if (email != null) {
                 tvPersonName = email.substring(0, email.indexOf('@'));
-            }
+            } else { tvPersonName = "Haven't name"; }
         } else {
             tvPersonName = name;
         }
 
         if (email == null) {
-            tvEmail = "user_anonymous_email";
+            tvEmail = "User anonymous email";
         } else {
             tvEmail = email;
         }
@@ -148,7 +148,7 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
                             postsDB.add(new Post(postDatabase.get(i)));
                         }
                         if (internet == INTERNET_CONNECTED) {
-                            if (posts.isEmpty()) {
+                            if (posts == null || posts.isEmpty()) {
                                 if (postsDB.isEmpty()) {
                                     view.internetConnectedApiEmptyDatabaseEmpty();
                                 } else {

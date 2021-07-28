@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
     public void openFragment(Fragment newFragment) {
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top)
+                .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top,
+                        R.anim.slide_in_top, R.anim.slide_out_bottom)
                 .replace(R.id.fragment_container_main, newFragment)
                 .addToBackStack(null);
 
@@ -82,7 +83,8 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
         newFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
-                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
+                        R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.fragment_container_main, newFragment)
                 .addToBackStack(null);
 

@@ -46,6 +46,6 @@ public class MoreAboutPostPresenter implements MoreAboutPostContract.Present {
         } else {
             view.getImageToPost(image_url);
         }
-        view.getDateToPost(title, pubData, description);
+        view.getDateToPost(title, description, pubData);
     }
 }
