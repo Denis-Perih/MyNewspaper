@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     View v;
 
     private final HomeContract.Presenter presenter = new HomePresenter(this);
-
+// text for example for github
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
