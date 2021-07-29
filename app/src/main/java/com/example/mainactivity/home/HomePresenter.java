@@ -57,7 +57,6 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
         this.view = view;
     }
 
-//  text for cherry-pick
     @Override
     public void connectedToInternet(Context context) {
         ConnectivityManager cm = (ConnectivityManager) context
