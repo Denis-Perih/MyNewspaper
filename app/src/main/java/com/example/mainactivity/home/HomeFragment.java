@@ -54,10 +54,6 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     View v;
 
     private final HomeContract.Presenter presenter = new HomePresenter(this);
-
-//  text for example working with the cherry pick from branch master
-// text for an example working with the cherry pick
-// text for an example working with the cherry pick 2
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
