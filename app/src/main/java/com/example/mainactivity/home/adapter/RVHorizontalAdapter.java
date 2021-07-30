@@ -1,4 +1,4 @@
-package com.example.mainactivity.home.rv_adapter;
+package com.example.mainactivity.home.adapter;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -62,13 +62,7 @@ public class RVHorizontalAdapter extends RecyclerView.Adapter<RVHorizontalAdapte
     @Override
     public void onBindViewHolder(@NonNull HorizontalViewHolder holder, int position) {
         holder.cvHorizontalBlockNews.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("title", horizontalBlockNewsData.get(position).getTitle());
-            bundle.putString("link", horizontalBlockNewsData.get(position).getLink());
-            bundle.putString("description", horizontalBlockNewsData.get(position).getDescription());
-            bundle.putString("pubDate", horizontalBlockNewsData.get(position).getPubDate());
-            bundle.putString("image_url", horizontalBlockNewsData.get(position).getImageUrl());
-            answerMoreDetails.onSuccessMoreDetails(bundle);
+            answerMoreDetails.onSuccessMoreDetails(horizontalBlockNewsData.get(position));
         });
         setDataToCard(holder, position);
     }

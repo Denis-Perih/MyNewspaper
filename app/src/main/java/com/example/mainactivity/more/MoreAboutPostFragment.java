@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.mainactivity.R;
+import com.example.mainactivity.home.HomeFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -44,7 +45,8 @@ public class MoreAboutPostFragment extends Fragment implements MoreAboutPostCont
         ibBack = v.findViewById(R.id.ibBack);
         ibBack.setOnClickListener(v1 -> {
             FragmentManager fm = requireActivity().getSupportFragmentManager();
-            fm.popBackStack();
+            fm.popBackStack(MoreAboutPostFragment.class.getSimpleName(),
+                    FragmentManager.POP_BACK_STACK_INCLUSIVE);
         });
 
         ivImageDetailsWindow = v.findViewById(R.id.ivImageDetailsWindow);

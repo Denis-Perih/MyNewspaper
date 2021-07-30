@@ -1,4 +1,4 @@
-package com.example.mainactivity.home.rv_adapter;
+package com.example.mainactivity.home.adapter;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -62,13 +62,7 @@ public class RVVerticalAdapter extends RecyclerView.Adapter<RVVerticalAdapter.Ve
     @Override
     public void onBindViewHolder(@NonNull VerticalViewHolder holder, int position) {
         holder.cvVerticalBlockNews.setOnClickListener(v -> {
-            Bundle bundle = new Bundle();
-            bundle.putString("title", verticalBlockNewsData.get(position).getTitle());
-            bundle.putString("link", verticalBlockNewsData.get(position).getLink());
-            bundle.putString("description", verticalBlockNewsData.get(position).getDescription());
-            bundle.putString("pubDate", verticalBlockNewsData.get(position).getPubDate());
-            bundle.putString("image_url", verticalBlockNewsData.get(position).getImageUrl());
-            answerMoreDetails.onSuccessMoreDetails(bundle);
+            answerMoreDetails.onSuccessMoreDetails(verticalBlockNewsData.get(position));
         });
         setDataToCard(holder, position);
     }

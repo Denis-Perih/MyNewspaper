@@ -1,4 +1,4 @@
-package com.example.mainactivity.login_signup.login;
+package com.example.mainactivity.auth.login;
 
 import android.content.Intent;
 

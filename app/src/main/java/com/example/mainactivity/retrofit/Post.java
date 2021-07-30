@@ -1,11 +1,17 @@
 package com.example.mainactivity.retrofit;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.mainactivity.database.PostDatabase;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Objects;
 
-public class Post {
+public class Post implements Parcelable {
+
+    public static final Creator<Post> CREATOR = new PostCreator();
+
     @SerializedName("title")
     private String title;
     @SerializedName("link")
@@ -88,5 +94,38 @@ public class Post {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeString(link);
+        dest.writeString(description);
+        dest.writeString(pubDate);
+        dest.writeString(imageUrl);
+    }
+
+    private static class PostCreator implements Creator<Post> {
+
+        @Override
+        public Post createFromParcel(Parcel source) {
+            String title = source.readString();
+            String link = source.readString();
+            String description = source.readString();
+            String pubDate = source.readString();
+            String imageUrl = source.readString();
+
+            return new Post(title, link, description, pubDate, imageUrl);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
     }
 }

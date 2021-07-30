@@ -1,4 +1,4 @@
-package com.example.mainactivity.splash;
+package com.example.mainactivity.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.example.mainactivity.main.MainRouterContract;
 import com.example.mainactivity.R;
 
-public class SplashScreenFragment extends Fragment  {
+public class AuthScreenFragment extends Fragment  {
 
     Button btnLogin;
     Button btnSignUp;
@@ -26,7 +26,7 @@ public class SplashScreenFragment extends Fragment  {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fr_splash_screen, container, false);
+        View v = inflater.inflate(R.layout.fr_auth, container, false);
         btnLogin = v.findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(v1 -> ((MainRouterContract) requireActivity()).openLoginFragment());
         btnSignUp = v.findViewById(R.id.btnSignUp);

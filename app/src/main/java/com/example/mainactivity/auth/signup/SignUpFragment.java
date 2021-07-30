@@ -1,4 +1,4 @@
-package com.example.mainactivity.login_signup.login;
+package com.example.mainactivity.auth.signup;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,25 +15,26 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mainactivity.main.MainRouterContract;
 import com.example.mainactivity.R;
-import com.example.mainactivity.login_signup.firebase.FirebaseListener;
-import com.example.mainactivity.login_signup.firebase.FirebaseLoginSingleton;
+import com.example.mainactivity.auth.firebase.FirebaseListener;
+import com.example.mainactivity.auth.firebase.FirebaseLoginSingleton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.Objects;
 
-public class LoginFragment extends Fragment implements FirebaseListener, LoginContract.View {
+public class SignUpFragment extends Fragment implements FirebaseListener, SignUpContract.View {
 
-    Button btnLogin, btnGoogleLogin, btnFacebookLogin;
+    Button btnSignUp, btnGoogleSignUp, btnFacebookSignUp;
 
-    ConstraintLayout clFrLoginScreen;
+    ConstraintLayout clFrSignUpScreen;
 
+    EditText name;
     EditText email;
     TextInputEditText password;
 
     FirebaseLoginSingleton fbSingleton;
 
-    private final LoginContract.Presenter presenter = new LoginPresenter(this);
+    private final SignUpContract.Presenter presenter = new SignUpPresenter(this);
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -46,22 +47,23 @@ public class LoginFragment extends Fragment implements FirebaseListener, LoginCo
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fr_login_screen, container, false);
 
-        btnLogin = v.findViewById(R.id.btnLogin);
-        btnLogin.setOnClickListener(v1 -> presenter
-                .onLoginClicked(email.getText().toString(),
-                        Objects.requireNonNull(password.getText()).toString()));
-        btnGoogleLogin = v.findViewById(R.id.btnGoogleLogin);
-        btnGoogleLogin.setOnClickListener(v12 -> presenter.onLoginClickedGoogle());
-        btnFacebookLogin = v.findViewById(R.id.btnFacebookLogin);
-        btnFacebookLogin.setOnClickListener(v13 -> presenter
-                .onLoginClickedFacebook(LoginFragment.this));
+        View v = inflater.inflate(R.layout.fr_sign_up_screen, container, false);
 
-        clFrLoginScreen = v.findViewById(R.id.clFrLoginScreen);
-
+        name = v.findViewById(R.id.etName);
         email = v.findViewById(R.id.etEmail);
         password = v.findViewById(R.id.etPassword);
+
+        btnSignUp = v.findViewById(R.id.btnSignUp);
+        btnSignUp.setOnClickListener(v1 -> presenter.onSignUpClicked(name.getText().toString(),
+                email.getText().toString(), Objects.requireNonNull(password.getText()).toString()));
+        btnGoogleSignUp = v.findViewById(R.id.btnGoogleSignUp);
+        btnGoogleSignUp.setOnClickListener(v12 -> presenter.onSignUpClickedGoogle());
+        btnFacebookSignUp = v.findViewById(R.id.btnFacebookSignUp);
+        btnFacebookSignUp.setOnClickListener(v13 -> presenter
+                .onSignUpClickedFacebook(SignUpFragment.this));
+
+        clFrSignUpScreen = v.findViewById(R.id.clFrSignUpScreen);
 
         return v;
     }
@@ -74,31 +76,31 @@ public class LoginFragment extends Fragment implements FirebaseListener, LoginCo
 
     @Override
     public void onSuccess(String indicatorAuth) {
-        presenter.onSuccessLogin(indicatorAuth);
+        presenter.onSuccessSignUp(indicatorAuth);
     }
 
     @Override
     public void onFailure(String indicatorAuth) {
-        presenter.onFailureLogin(indicatorAuth);
+        presenter.onFailureSignUp(indicatorAuth);
     }
 
     @Override
-    public void signInWithEmail(String email, String password) {
-        fbSingleton.executeLogin(this, email, password);
+    public void signInWithEmail(String name, String email, String password) {
+        fbSingleton.executeSignUp(this, name, email, password);
     }
 
     @Override
     public void showSnackBar(String text) {
-        Snackbar.make(clFrLoginScreen, text, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(clFrSignUpScreen, text, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
-    public void startSignInGoogle() {
+    public void startSignUpGoogle() {
         fbSingleton.signIn();
     }
 
     @Override
-    public void startSignInFacebook() {
+    public void startSignUpFacebook() {
         fbSingleton.loginFacebook();
     }
 
@@ -113,12 +115,12 @@ public class LoginFragment extends Fragment implements FirebaseListener, LoginCo
     }
 
     @Override
-    public void successLogin() {
+    public void successSignUp() {
         ((MainRouterContract) requireActivity()).openHomeFragment();
     }
 
     @Override
-    public void failureLogin(String text) {
-        Snackbar.make(clFrLoginScreen, text, Snackbar.LENGTH_SHORT).show();
+    public void failureSignUp(String text) {
+        Snackbar.make(clFrSignUpScreen, text, Snackbar.LENGTH_SHORT).show();
     }
 }

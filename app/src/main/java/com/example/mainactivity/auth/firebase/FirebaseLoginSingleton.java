@@ -1,4 +1,4 @@
-package com.example.mainactivity.login_signup.firebase;
+package com.example.mainactivity.auth.firebase;
 
 import android.app.Activity;
 import android.content.Intent;

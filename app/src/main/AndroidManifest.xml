@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/ic_launcher_icon_app_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
-        android:name=".database.DatabaseApplication">
+        android:name=".MyNewspaperApplication">
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id"/>
