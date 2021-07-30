@@ -2,10 +2,9 @@ package com.example.mainactivity.home;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.Bundle;
 
-import com.example.mainactivity.home.rv_adapter.RVHorizontalAdapter;
-import com.example.mainactivity.home.rv_adapter.RVVerticalAdapter;
+import com.example.mainactivity.home.adapter.RVHorizontalAdapter;
+import com.example.mainactivity.home.adapter.RVVerticalAdapter;
 import com.example.mainactivity.retrofit.Post;
 
 import java.util.List;
@@ -28,25 +27,25 @@ public interface HomeContract {
 
         void activityFinish();
 
-        void successMoreDetails(Bundle bundle);
+        void openMoreDetails(Post post);
 
         void setHorizontalAdapter(RVHorizontalAdapter rvHorizontalAdapter);
 
         void setVerticalAdapter(RVVerticalAdapter rvVerticalAdapter);
 
-        void internetConnectedApiEmptyDatabaseEmpty();
+        void showScreenIfApiEmptyDatabaseEmpty();
 
-        void internetConnectedApiEmptyDatabaseNotEmpty();
+        void showScreenIfApiEmptyDatabaseNoEmpty();
 
-        void internetConnectedApiNotEmpty();
+        void showScreenIfApiNoEmpty();
 
-        void internetNotConnectedDatabaseEmpty();
+        void showScreenIfNoInternetDatabaseEmpty();
 
-        void internetNotConnectedDatabaseNotEmpty();
+        void showScreenIfNoInternetDatabaseNotEmpty();
 
-        void databaseErrorApiEmpty();
+        void showScreenIfDatabaseErrorApiEmpty();
 
-        void databaseErrorApiNotEmpty();
+        void showScreenIfDatabaseErrorApiNoEmpty();
     }
 
     interface Presenter {

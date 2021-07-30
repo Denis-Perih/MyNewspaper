@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,11 +11,11 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.mainactivity.R;
 import com.example.mainactivity.database.AppDatabase;
-import com.example.mainactivity.database.DatabaseApplication;
+import com.example.mainactivity.MyNewspaperApplication;
 import com.example.mainactivity.database.PostDatabase;
-import com.example.mainactivity.home.rv_adapter.RVHorizontalAdapter;
-import com.example.mainactivity.home.rv_adapter.RVVerticalAdapter;
-import com.example.mainactivity.login_signup.firebase.UsersData;
+import com.example.mainactivity.home.adapter.RVHorizontalAdapter;
+import com.example.mainactivity.home.adapter.RVVerticalAdapter;
+import com.example.mainactivity.auth.firebase.UsersData;
 import com.example.mainactivity.more.AnswerMoreDetails;
 import com.example.mainactivity.retrofit.AnswerJSON;
 import com.example.mainactivity.retrofit.GetObjectJSON;
@@ -49,7 +48,7 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
 
     private final List<Post> blockNewsData = new ArrayList<>();
 
-    private final AppDatabase db = DatabaseApplication.getInstance().getDatabase();
+    private final AppDatabase db = MyNewspaperApplication.getDatabase();
 
     private final HomeContract.View view;
 
@@ -85,7 +84,7 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
         String email = usersData.getEmail();
         Uri photoUrl = usersData.getPhotoUri();
 
-        String tvPersonName = null, tvEmail;
+        String tvPersonName, tvEmail;
 
         if (name == null || name.equals("")) {
             if (email != null) {
@@ -150,25 +149,25 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
                         if (internet == INTERNET_CONNECTED) {
                             if (posts == null || posts.isEmpty()) {
                                 if (postsDB.isEmpty()) {
-                                    view.internetConnectedApiEmptyDatabaseEmpty();
+                                    view.showScreenIfApiEmptyDatabaseEmpty();
                                 } else {
                                     linkageList(postsDB);
                                     view.buildNewsPost();
-                                    view.internetConnectedApiEmptyDatabaseNotEmpty();
+                                    view.showScreenIfApiEmptyDatabaseNoEmpty();
                                 }
                             } else {
                                 postsDB.addAll(0, posts);
                                 linkageList(postsDB);
                                 view.buildNewsPost();
-                                view.internetConnectedApiNotEmpty();
+                                view.showScreenIfApiNoEmpty();
                             }
                         } else if (internet == INTERNET_NOT_CONNECTED) {
                             if (postsDB.isEmpty()) {
-                                view.internetNotConnectedDatabaseEmpty();
+                                view.showScreenIfNoInternetDatabaseEmpty();
                             } else {
                                 view.buildNewsPost();
                                 linkageList(postsDB);
-                                view.internetNotConnectedDatabaseNotEmpty();
+                                view.showScreenIfNoInternetDatabaseNotEmpty();
                             }
                         }
                     }
@@ -176,11 +175,11 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (posts.isEmpty()) {
-                            view.databaseErrorApiEmpty();
+                            view.showScreenIfDatabaseErrorApiEmpty();
                         } else  {
                             linkageList(posts);
                             view.buildNewsPost();
-                            view.databaseErrorApiNotEmpty();
+                            view.showScreenIfDatabaseErrorApiNoEmpty();
                         }
                     }
                 });
@@ -249,7 +248,7 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
     }
 
     @Override
-    public void onSuccessMoreDetails(Bundle bundle) {
-        view.successMoreDetails(bundle);
+    public void onSuccessMoreDetails(Post post) {
+        view.openMoreDetails(post);
     }
 }

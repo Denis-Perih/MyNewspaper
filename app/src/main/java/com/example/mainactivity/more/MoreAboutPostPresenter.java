@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
 import com.example.mainactivity.R;
+import com.example.mainactivity.retrofit.Post;
 
 public class MoreAboutPostPresenter implements MoreAboutPostContract.Present {
 
@@ -34,11 +35,12 @@ public class MoreAboutPostPresenter implements MoreAboutPostContract.Present {
     public void setDataToPost(Fragment fragment) {
         Bundle bundle = fragment.getArguments();
         if (bundle != null) {
-            this.title = bundle.getString("title");
-            this.link = bundle.getString("link");
-            this.description = bundle.getString("description");
-            this.pubData = bundle.getString("pubDate");
-            this.image_url = bundle.getString("image_url");
+            Post post = bundle.getParcelable("post");
+            this.title = post.getTitle();
+            this.link = post.getLink();
+            this.description = post.getDescription();
+            this.pubData = post.getPubDate();
+            this.image_url = post.getImageUrl();
         }
 
         if (image_url == null || image_url.equals("")) {

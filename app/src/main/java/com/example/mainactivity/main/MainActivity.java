@@ -11,21 +11,25 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.mainactivity.R;
 import com.example.mainactivity.home.HomeFragment;
 import com.example.mainactivity.home.IOnBackPressed;
-import com.example.mainactivity.login_signup.firebase.UsersData;
-import com.example.mainactivity.login_signup.login.LoginFragment;
-import com.example.mainactivity.login_signup.signup.SignUpFragment;
+import com.example.mainactivity.auth.firebase.UsersData;
+import com.example.mainactivity.auth.login.LoginFragment;
+import com.example.mainactivity.auth.signup.SignUpFragment;
 import com.example.mainactivity.more.MoreAboutPostFragment;
+import com.example.mainactivity.retrofit.Post;
 import com.example.mainactivity.splash.SplashFragment;
-import com.example.mainactivity.splash.SplashScreenFragment;
+import com.example.mainactivity.auth.AuthScreenFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 
 public class MainActivity extends AppCompatActivity implements MainRouterContract {
 
+    private Bundle saverInstanceState;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.saverInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
         openSplashFragment();
     }
@@ -71,14 +75,17 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
                 .setCustomAnimations(R.anim.slide_in_bottom, R.anim.slide_out_top,
                         R.anim.slide_in_top, R.anim.slide_out_bottom)
                 .replace(R.id.fragment_container_main, newFragment)
-                .addToBackStack(null);
+                .addToBackStack(newFragment.getClass().getSimpleName());
 
         transaction.commit();
     }
 
     @Override
-    public void openMoreAboutFragment(Bundle bundle) {
+    public void openMoreAboutFragment(Post post) {
         Fragment newFragment = new MoreAboutPostFragment();
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("post", post);
 
         newFragment.setArguments(bundle);
 
@@ -86,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
                         R.anim.slide_in_left, R.anim.slide_out_right)
                 .replace(R.id.fragment_container_main, newFragment)
-                .addToBackStack(null);
+                .addToBackStack(newFragment.getClass().getSimpleName());
 
         transaction.commit();
     }
@@ -103,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
 
     @Override
     public void openSplashScreenFragment() {
-        openFragment(new SplashScreenFragment());
+        openFragment(new AuthScreenFragment());
     }
 
     @Override

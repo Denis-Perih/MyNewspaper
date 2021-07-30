@@ -17,19 +17,19 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.mainactivity.main.MainRouterContract;
 import com.example.mainactivity.R;
-import com.example.mainactivity.home.rv_adapter.RVHorizontalAdapter;
-import com.example.mainactivity.home.rv_adapter.RVVerticalAdapter;
+import com.example.mainactivity.home.adapter.RVHorizontalAdapter;
+import com.example.mainactivity.home.adapter.RVVerticalAdapter;
+import com.example.mainactivity.retrofit.Post;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
-
-import java.util.Objects;
 
 public class HomeFragment extends Fragment implements IOnBackPressed, NavigationView.OnNavigationItemSelectedListener, HomeContract.View {
 
@@ -59,46 +59,36 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        if (v == null) {
-            v = inflater.inflate(R.layout.fr_home, container, false);
+        v = inflater.inflate(R.layout.fr_home, container, false);
 
-            swipe_container = v.findViewById(R.id.swipe_container);
-            swipe_container.setOnRefreshListener(() -> presenter.connectedToInternet(getContext()));
-            swipe_container.setColorSchemeResources(R.color.coral);
+        swipe_container = v.findViewById(R.id.swipe_container);
+        swipe_container.setOnRefreshListener(() -> presenter.connectedToInternet(getContext()));
+        swipe_container.setColorSchemeResources(R.color.coral);
 
-            pbDownloadNews = v.findViewById(R.id.pbDownloadNews);
-            pbDownloadNews.setVisibility(View.VISIBLE);
+        pbDownloadNews = v.findViewById(R.id.pbDownloadNews);
+        pbDownloadNews.setVisibility(View.VISIBLE);
 
-            dlHomeDrawer = v.findViewById(R.id.dlHomeDrawer);
-            nav_view = v.findViewById(R.id.nav_view);
-            btnMenu = v.findViewById(R.id.btnMenu);
-            btnMenu.setOnClickListener(v -> dlHomeDrawer.openDrawer(GravityCompat.START));
+        dlHomeDrawer = v.findViewById(R.id.dlHomeDrawer);
+        nav_view = v.findViewById(R.id.nav_view);
+        btnMenu = v.findViewById(R.id.btnMenu);
+        btnMenu.setOnClickListener(v -> dlHomeDrawer.openDrawer(GravityCompat.START));
 
-            nav_header_navigation = nav_view.getHeaderView(0);
+        nav_header_navigation = nav_view.getHeaderView(0);
 
-            headerIconUser = v.findViewById(R.id.headerIconUser);
-            menuIconUser = nav_header_navigation.findViewById(R.id.menuIconUser);
-            tvPersonName = nav_header_navigation.findViewById(R.id.tvPersonName);
-            tvEmail = nav_header_navigation.findViewById(R.id.tvEmail);
+        headerIconUser = v.findViewById(R.id.headerIconUser);
+        menuIconUser = nav_header_navigation.findViewById(R.id.menuIconUser);
+        tvPersonName = nav_header_navigation.findViewById(R.id.tvPersonName);
+        tvEmail = nav_header_navigation.findViewById(R.id.tvEmail);
 
-            tvNoConnect = v.findViewById(R.id.tvNoConnect);
-            ivNoConnectIcon = v.findViewById(R.id.ivNoConnectIcon);
+        tvNoConnect = v.findViewById(R.id.tvNoConnect);
+        ivNoConnectIcon = v.findViewById(R.id.ivNoConnectIcon);
 
-            presenter.connectedToInternet(getContext());
+        presenter.connectedToInternet(getContext());
 
-            presenter.initializeUser();
+        presenter.initializeUser();
 
-            navigationDrawerMenu();
-        }
+        navigationDrawerMenu();
         return v;
-    }
-
-    @Override
-    public void onDestroyView() {
-        if (v.getParent() != null) {
-            ((ViewGroup)v.getParent()).removeView(v);
-        }
-        super.onDestroyView();
     }
 
     private void navigationDrawerMenu() {
@@ -183,8 +173,10 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void successMoreDetails(Bundle bundle) {
-        ((MainRouterContract) requireActivity()).openMoreAboutFragment(bundle);
+    public void openMoreDetails(Post post) {
+        FragmentManager fm = requireActivity().getSupportFragmentManager();
+        fm.saveFragmentInstanceState(this);
+        ((MainRouterContract) requireActivity()).openMoreAboutFragment(post);
     }
 
     @Override
@@ -198,7 +190,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void internetConnectedApiEmptyDatabaseEmpty() {
+    public void showScreenIfApiEmptyDatabaseEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_server);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -207,18 +199,18 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void internetConnectedApiEmptyDatabaseNotEmpty() {
+    public void showScreenIfApiEmptyDatabaseNoEmpty() {
         Snackbar.make(dlHomeDrawer, R.string.text_not_connected_server, Snackbar.LENGTH_SHORT).show();
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void internetConnectedApiNotEmpty() {
+    public void showScreenIfApiNoEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void internetNotConnectedDatabaseEmpty() {
+    public void showScreenIfNoInternetDatabaseEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_internet);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -227,12 +219,12 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void internetNotConnectedDatabaseNotEmpty() {
+    public void showScreenIfNoInternetDatabaseNotEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void databaseErrorApiEmpty() {
+    public void showScreenIfDatabaseErrorApiEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_server);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -241,7 +233,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void databaseErrorApiNotEmpty() {
+    public void showScreenIfDatabaseErrorApiNoEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 }
