@@ -123,5 +123,4 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
         openFragment(new SignUpFragment());
     }
 
-
 }

@@ -1,7 +1,5 @@
 package com.example.mainactivity.main;
 
-import android.os.Bundle;
-
 import com.example.mainactivity.retrofit.Post;
 
 public interface MainRouterContract {

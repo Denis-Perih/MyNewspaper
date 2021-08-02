@@ -33,19 +33,19 @@ public interface HomeContract {
 
         void setVerticalAdapter(RVVerticalAdapter rvVerticalAdapter);
 
-        void showScreenIfApiEmptyDatabaseEmpty();
+        void showScreenApiEmptyDatabaseEmpty();
 
-        void showScreenIfApiEmptyDatabaseNoEmpty();
+        void showScreenApiEmptyDatabaseNoEmpty();
 
-        void showScreenIfApiNoEmpty();
+        void showScreenApiNoEmpty();
 
-        void showScreenIfNoInternetDatabaseEmpty();
+        void showScreenNoInternetDatabaseEmpty();
 
-        void showScreenIfNoInternetDatabaseNotEmpty();
+        void showScreenNoInternetDatabaseNotEmpty();
 
-        void showScreenIfDatabaseErrorApiEmpty();
+        void showScreenDatabaseErrorApiEmpty();
 
-        void showScreenIfDatabaseErrorApiNoEmpty();
+        void showScreenDatabaseErrorApiNoEmpty();
     }
 
     interface Presenter {

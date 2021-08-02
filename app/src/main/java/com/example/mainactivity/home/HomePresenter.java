@@ -149,25 +149,25 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
                         if (internet == INTERNET_CONNECTED) {
                             if (posts == null || posts.isEmpty()) {
                                 if (postsDB.isEmpty()) {
-                                    view.showScreenIfApiEmptyDatabaseEmpty();
+                                    view.showScreenApiEmptyDatabaseEmpty();
                                 } else {
                                     linkageList(postsDB);
                                     view.buildNewsPost();
-                                    view.showScreenIfApiEmptyDatabaseNoEmpty();
+                                    view.showScreenApiEmptyDatabaseNoEmpty();
                                 }
                             } else {
                                 postsDB.addAll(0, posts);
                                 linkageList(postsDB);
                                 view.buildNewsPost();
-                                view.showScreenIfApiNoEmpty();
+                                view.showScreenApiNoEmpty();
                             }
                         } else if (internet == INTERNET_NOT_CONNECTED) {
                             if (postsDB.isEmpty()) {
-                                view.showScreenIfNoInternetDatabaseEmpty();
+                                view.showScreenNoInternetDatabaseEmpty();
                             } else {
                                 view.buildNewsPost();
                                 linkageList(postsDB);
-                                view.showScreenIfNoInternetDatabaseNotEmpty();
+                                view.showScreenNoInternetDatabaseNotEmpty();
                             }
                         }
                     }
@@ -175,11 +175,11 @@ public class HomePresenter implements HomeContract.Presenter, AnswerJSON, Answer
                     @Override
                     public void onError(@NonNull Throwable e) {
                         if (posts.isEmpty()) {
-                            view.showScreenIfDatabaseErrorApiEmpty();
+                            view.showScreenDatabaseErrorApiEmpty();
                         } else  {
                             linkageList(posts);
                             view.buildNewsPost();
-                            view.showScreenIfDatabaseErrorApiNoEmpty();
+                            view.showScreenDatabaseErrorApiNoEmpty();
                         }
                     }
                 });

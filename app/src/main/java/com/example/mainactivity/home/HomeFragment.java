@@ -190,7 +190,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void showScreenIfApiEmptyDatabaseEmpty() {
+    public void showScreenApiEmptyDatabaseEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_server);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -199,18 +199,18 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void showScreenIfApiEmptyDatabaseNoEmpty() {
+    public void showScreenApiEmptyDatabaseNoEmpty() {
         Snackbar.make(dlHomeDrawer, R.string.text_not_connected_server, Snackbar.LENGTH_SHORT).show();
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void showScreenIfApiNoEmpty() {
+    public void showScreenApiNoEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void showScreenIfNoInternetDatabaseEmpty() {
+    public void showScreenNoInternetDatabaseEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_internet);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -219,12 +219,12 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void showScreenIfNoInternetDatabaseNotEmpty() {
+    public void showScreenNoInternetDatabaseNotEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 
     @Override
-    public void showScreenIfDatabaseErrorApiEmpty() {
+    public void showScreenDatabaseErrorApiEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
         tvNoConnect.setText(R.string.text_not_connected_server);
         tvNoConnect.setVisibility(View.VISIBLE);
@@ -233,7 +233,7 @@ public class HomeFragment extends Fragment implements IOnBackPressed, Navigation
     }
 
     @Override
-    public void showScreenIfDatabaseErrorApiNoEmpty() {
+    public void showScreenDatabaseErrorApiNoEmpty() {
         pbDownloadNews.setVisibility(View.INVISIBLE);
     }
 }
