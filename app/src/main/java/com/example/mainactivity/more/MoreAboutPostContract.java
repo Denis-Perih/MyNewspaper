@@ -1,10 +1,7 @@
 package com.example.mainactivity.more;
 
 import android.content.Intent;
-
-import androidx.fragment.app.Fragment;
-
-import com.example.mainactivity.retrofit.Post;
+import android.os.Bundle;
 
 public interface MoreAboutPostContract {
 
@@ -25,6 +22,6 @@ public interface MoreAboutPostContract {
 
         void openDetailsAuthor();
 
-        void setDataToPost(Post post);
+        void setDataToPost(Bundle bundle);
     }
 }

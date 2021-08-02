@@ -24,12 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements MainRouterContract {
 
-    private Bundle saverInstanceState;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.saverInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
         openSplashFragment();
     }
@@ -82,12 +79,12 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
 
     @Override
     public void openMoreAboutFragment(Post post) {
-        Fragment newFragment = new MoreAboutPostFragment(post);
+        Fragment newFragment = new MoreAboutPostFragment();
 
-//        Bundle bundle = new Bundle();
-//        bundle.putParcelable("post", post);
-//
-//        newFragment.setArguments(post);
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("post", post);
+
+        newFragment.setArguments(bundle);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,

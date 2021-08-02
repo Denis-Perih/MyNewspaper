@@ -17,8 +17,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.mainactivity.R;
-import com.example.mainactivity.home.HomeFragment;
-import com.example.mainactivity.retrofit.Post;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
@@ -32,13 +30,7 @@ public class MoreAboutPostFragment extends Fragment implements MoreAboutPostCont
     TextView tvDetailsTitle, tvDetailsDate, tvDetailsTextNews;
     Button btnDetailsAuthor;
 
-    Post post;
-
     private final MoreAboutPostContract.Present presenter = new MoreAboutPostPresenter(this);
-
-    public MoreAboutPostFragment(Post post) {
-        this.post = post;
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -65,9 +57,14 @@ public class MoreAboutPostFragment extends Fragment implements MoreAboutPostCont
         btnDetailsAuthor = v.findViewById(R.id.btnDetailsAuthor);
         btnDetailsAuthor.setOnClickListener(v12 -> presenter.openDetailsAuthor());
 
-        presenter.setDataToPost(post);
+        getBundleData();
 
         return v;
+    }
+
+    private void getBundleData() {
+        Bundle bundle = getArguments();
+        presenter.setDataToPost(bundle);
     }
 
     @Override
