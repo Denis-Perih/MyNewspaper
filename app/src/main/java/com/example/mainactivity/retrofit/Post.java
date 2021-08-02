@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Post implements Parcelable, Serializable {
+public class Post implements Parcelable {
 
     public static final Creator<Post> CREATOR = new PostCreator();
 
