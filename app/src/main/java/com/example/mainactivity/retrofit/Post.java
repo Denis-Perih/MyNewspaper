@@ -6,9 +6,10 @@ import android.os.Parcelable;
 import com.example.mainactivity.database.PostDatabase;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Post implements Parcelable {
+public class Post implements Parcelable, Serializable {
 
     public static final Creator<Post> CREATOR = new PostCreator();
 

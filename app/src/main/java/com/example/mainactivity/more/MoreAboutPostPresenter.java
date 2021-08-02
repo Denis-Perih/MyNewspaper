@@ -32,10 +32,8 @@ public class MoreAboutPostPresenter implements MoreAboutPostContract.Present {
     }
 
     @Override
-    public void setDataToPost(Fragment fragment) {
-        Bundle bundle = fragment.getArguments();
-        if (bundle != null) {
-            Post post = bundle.getParcelable("post");
+    public void setDataToPost(Post post) {
+        if (post != null) {
             this.title = post.getTitle();
             this.link = post.getLink();
             this.description = post.getDescription();

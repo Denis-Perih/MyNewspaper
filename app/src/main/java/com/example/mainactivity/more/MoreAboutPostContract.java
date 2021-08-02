@@ -4,6 +4,8 @@ import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.mainactivity.retrofit.Post;
+
 public interface MoreAboutPostContract {
 
     interface View {
@@ -23,6 +25,6 @@ public interface MoreAboutPostContract {
 
         void openDetailsAuthor();
 
-        void setDataToPost(Fragment fragment);
+        void setDataToPost(Post post);
     }
 }

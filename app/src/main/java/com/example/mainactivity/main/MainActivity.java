@@ -82,12 +82,12 @@ public class MainActivity extends AppCompatActivity implements MainRouterContrac
 
     @Override
     public void openMoreAboutFragment(Post post) {
-        Fragment newFragment = new MoreAboutPostFragment();
+        Fragment newFragment = new MoreAboutPostFragment(post);
 
-        Bundle bundle = new Bundle();
-        bundle.putParcelable("post", post);
-
-        newFragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        bundle.putParcelable("post", post);
+//
+//        newFragment.setArguments(post);
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction()
                 .setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left,
