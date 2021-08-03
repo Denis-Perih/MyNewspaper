@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import com.example.mainactivity.database.PostDatabase;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 public class Post implements Parcelable {

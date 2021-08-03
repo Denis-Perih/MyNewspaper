@@ -24,12 +24,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements MainRouterContract {
 
-    private Bundle saverInstanceState;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.saverInstanceState = savedInstanceState;
         setContentView(R.layout.activity_main);
         openSplashFragment();
     }

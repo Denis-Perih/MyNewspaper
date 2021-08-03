@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import com.example.mainactivity.R;
 import com.example.mainactivity.retrofit.Post;
 
@@ -32,8 +30,7 @@ public class MoreAboutPostPresenter implements MoreAboutPostContract.Present {
     }
 
     @Override
-    public void setDataToPost(Fragment fragment) {
-        Bundle bundle = fragment.getArguments();
+    public void setDataToPost(Bundle bundle) {
         if (bundle != null) {
             Post post = bundle.getParcelable("post");
             this.title = post.getTitle();

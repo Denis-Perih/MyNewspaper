@@ -1,8 +1,7 @@
 package com.example.mainactivity.more;
 
 import android.content.Intent;
-
-import androidx.fragment.app.Fragment;
+import android.os.Bundle;
 
 public interface MoreAboutPostContract {
 
@@ -23,6 +22,6 @@ public interface MoreAboutPostContract {
 
         void openDetailsAuthor();
 
-        void setDataToPost(Fragment fragment);
+        void setDataToPost(Bundle bundle);
     }
 }
